@@ -1,0 +1,149 @@
+{
+  "equipment": [
+    {
+      "id": "RM-MTR-01",
+      "name": "Rolling Mill Main Drive Motor",
+      "area": "Hot Strip Mill",
+      "criticality": 5,
+      "normal_ranges": {
+        "temperature_c": [45, 75],
+        "vibration_mm_s": [0, 4.5],
+        "current_a": [180, 260],
+        "lubrication_pressure_bar": [2.5, 5.0]
+      },
+      "spares": [
+        {"part": "Drive-end bearing 6318 C3", "stock": 2, "lead_time_days": 7},
+        {"part": "Motor cooling fan", "stock": 1, "lead_time_days": 14},
+        {"part": "RTD temperature sensor", "stock": 5, "lead_time_days": 3}
+      ]
+    },
+    {
+      "id": "CC-PMP-02",
+      "name": "Continuous Casting Hydraulic Pump",
+      "area": "Caster Segment",
+      "criticality": 4,
+      "normal_ranges": {
+        "temperature_c": [35, 65],
+        "vibration_mm_s": [0, 3.8],
+        "pressure_bar": [145, 170],
+        "oil_particle_count": [0, 18]
+      },
+      "spares": [
+        {"part": "Hydraulic pump cartridge kit", "stock": 0, "lead_time_days": 12},
+        {"part": "Return line filter element", "stock": 8, "lead_time_days": 2},
+        {"part": "Pressure relief valve", "stock": 1, "lead_time_days": 10}
+      ]
+    },
+    {
+      "id": "BF-FAN-03",
+      "name": "Blast Furnace ID Fan",
+      "area": "Blast Furnace",
+      "criticality": 5,
+      "normal_ranges": {
+        "temperature_c": [40, 80],
+        "vibration_mm_s": [0, 5.0],
+        "current_a": [320, 450],
+        "bearing_noise_db": [0, 82]
+      },
+      "spares": [
+        {"part": "Fan shaft bearing", "stock": 1, "lead_time_days": 18},
+        {"part": "Coupling insert", "stock": 3, "lead_time_days": 4},
+        {"part": "Impeller balancing weights", "stock": 12, "lead_time_days": 1}
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "SOP-RM-MTR-01",
+      "title": "SOP: Rolling Mill Motor High Vibration",
+      "equipment_id": "RM-MTR-01",
+      "type": "SOP",
+      "content": "If vibration exceeds 6.0 mm/s with rising motor temperature, inspect drive-end bearing, coupling alignment, lubrication pressure, and cooling airflow. If bearing noise or metal particles are present, plan bearing replacement during the nearest shutdown. Do not continue above 8.0 mm/s without supervisor approval."
+    },
+    {
+      "id": "MAN-RM-MTR-01",
+      "title": "Manual: Main Drive Motor Thermal Protection",
+      "equipment_id": "RM-MTR-01",
+      "type": "Manual",
+      "content": "Sustained winding temperature above 85 C indicates overload, cooling fan degradation, blocked ventilation, or bearing friction. Check current draw, fan condition, inlet filters, and lubrication before restart."
+    },
+    {
+      "id": "FR-2025-118",
+      "title": "Failure Report: RM-MTR-01 Bearing Seizure",
+      "equipment_id": "RM-MTR-01",
+      "type": "Failure Report",
+      "content": "Previous bearing seizure occurred after three shifts of vibration above 7 mm/s and temperature above 88 C. Root cause was inadequate lubrication pressure and delayed spare planning. Corrective action included bearing replacement and lubrication line flushing."
+    },
+    {
+      "id": "SOP-CC-PMP-02",
+      "title": "SOP: Hydraulic Pump Pressure Drop",
+      "equipment_id": "CC-PMP-02",
+      "type": "SOP",
+      "content": "For pressure below 135 bar, inspect suction filter, return filter, oil contamination, relief valve setting, and pump cartridge wear. If particle count is high, replace filters and schedule oil flushing. Low stock cartridge kits require immediate procurement escalation."
+    },
+    {
+      "id": "LOG-CC-PMP-02",
+      "title": "Maintenance Log: Caster Hydraulic Instability",
+      "equipment_id": "CC-PMP-02",
+      "type": "Maintenance Log",
+      "content": "Repeated pressure instability was resolved by replacing return line filter and cleaning suction strainer. When pressure drop was combined with oil particle count above 25, pump cartridge wear was found within two weeks."
+    },
+    {
+      "id": "SOP-BF-FAN-03",
+      "title": "SOP: ID Fan Abnormal Vibration",
+      "equipment_id": "BF-FAN-03",
+      "type": "SOP",
+      "content": "Vibration above 6.5 mm/s requires fan load reduction and inspection of bearing housing temperature, coupling, foundation bolts, and impeller deposits. Critical furnace fans require immediate supervisor notification above 8.5 mm/s."
+    }
+  ],
+  "rules": [
+    {
+      "fault": "Bearing wear or lubrication failure",
+      "keywords": ["vibration", "temperature", "bearing", "noise", "lubrication", "hot"],
+      "signals": ["vibration_mm_s", "temperature_c", "lubrication_pressure_bar", "bearing_noise_db"],
+      "root_causes": ["bearing wear", "insufficient lubrication", "coupling misalignment", "blocked cooling airflow"],
+      "actions": [
+        "Inspect bearing housing temperature and acoustic noise.",
+        "Check lubrication pressure, grease/oil flow, and contamination.",
+        "Verify coupling alignment and foundation looseness.",
+        "Plan bearing replacement if vibration trend remains high or metal particles are found."
+      ]
+    },
+    {
+      "fault": "Hydraulic pump degradation or contamination",
+      "keywords": ["pressure", "hydraulic", "pump", "oil", "filter", "particle", "low pressure"],
+      "signals": ["pressure_bar", "oil_particle_count", "temperature_c", "vibration_mm_s"],
+      "root_causes": ["clogged filter", "pump cartridge wear", "oil contamination", "relief valve drift"],
+      "actions": [
+        "Inspect suction and return filters immediately.",
+        "Check oil particle count and water contamination.",
+        "Verify relief valve set pressure.",
+        "Raise procurement request for pump cartridge kit if stock is zero."
+      ]
+    },
+    {
+      "fault": "Cooling or overload issue",
+      "keywords": ["overload", "current", "temperature", "cooling", "fan", "blocked"],
+      "signals": ["current_a", "temperature_c"],
+      "root_causes": ["process overload", "cooling fan degradation", "blocked ventilation", "electrical imbalance"],
+      "actions": [
+        "Compare current against rated operating band.",
+        "Inspect cooling fan, filters, and ventilation ducts.",
+        "Reduce process load until temperature stabilizes.",
+        "Check phase imbalance and terminal tightness."
+      ]
+    },
+    {
+      "fault": "ID fan imbalance or bearing distress",
+      "keywords": ["id", "fan", "vibration", "impeller", "foundation", "bearing", "noise"],
+      "signals": ["vibration_mm_s", "bearing_noise_db", "temperature_c", "current_a"],
+      "root_causes": ["impeller deposit imbalance", "fan bearing distress", "loose foundation bolts", "coupling misalignment"],
+      "actions": [
+        "Reduce fan load and notify the blast furnace supervisor.",
+        "Inspect bearing housing temperature, foundation bolts, and coupling condition.",
+        "Check impeller deposits and plan dynamic balancing if vibration remains high.",
+        "Reserve fan shaft bearing because procurement lead time is high."
+      ]
+    }
+  ]
+}
