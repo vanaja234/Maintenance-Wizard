@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Rolling mill motor bearing risk",
+    "equipment_id": "RM-MTR-01",
+    "query": "Main drive motor has high vibration, rising temperature, bearing noise, and lubrication pressure is low.",
+    "sensors": {
+      "temperature_c": 91,
+      "vibration_mm_s": 7.8,
+      "current_a": 248,
+      "lubrication_pressure_bar": 1.8
+    }
+  },
+  {
+    "title": "Caster hydraulic pressure drop",
+    "equipment_id": "CC-PMP-02",
+    "query": "Hydraulic pump pressure is dropping and oil particle count is abnormal. Caster segment is showing unstable movement.",
+    "sensors": {
+      "temperature_c": 62,
+      "vibration_mm_s": 3.2,
+      "pressure_bar": 128,
+      "oil_particle_count": 34
+    }
+  },
+  {
+    "title": "Blast furnace ID fan vibration",
+    "equipment_id": "BF-FAN-03",
+    "query": "ID fan vibration crossed alarm limit with bearing noise. Need risk and immediate actions.",
+    "sensors": {
+      "temperature_c": 83,
+      "vibration_mm_s": 8.9,
+      "current_a": 410,
+      "bearing_noise_db": 89
+    }
+  },
+  {
+    "title": "Normal rolling mill health check",
+    "equipment_id": "RM-MTR-01",
+    "query": "Routine health check. Motor temperature, vibration, current, and lubrication pressure are normal.",
+    "sensors": {
+      "temperature_c": 62,
+      "vibration_mm_s": 2.4,
+      "current_a": 220,
+      "lubrication_pressure_bar": 3.6
+    }
+  }
+]
